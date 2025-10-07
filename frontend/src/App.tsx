@@ -1,33 +1,35 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import { WalletClient, P2PKH, Utils } from '@bsv/sdk'
+
+const wallet = new WalletClient()
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [addr, setAddr] = useState('')
+  const [amt, setAmt] = useState('')
+  const [atom, setAtom] = useState('')
+
+  const handleSend = async () => {
+    const { tx } = await wallet.createAction({
+      description: 'Fund',
+      outputs: [{
+        outputDescription: 'Fund',
+        lockingScript: new P2PKH().lock(addr).toHex(),
+        satoshis: Number(amt)
+      }]
+    })
+    setAtom(Utils.toHex(tx as number[]))
+  }
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+    <h1>Funder</h1>
+    <input placeholder='Enter an address...' type='text' value={addr} onChange={(e) => setAddr(e.target.value)} />
+    <br />
+    <input placeholder='Amount (satoshis)' type='number' value={amt} onChange={(e) => setAmt(e.target.value)} />
+    <br />
+    <button onClick={handleSend}>Send</button>
+    <p>{atom}</p>
     </>
   )
 }
