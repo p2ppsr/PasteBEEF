@@ -1,49 +1,14 @@
+/* App.css */
+
+/* Root defaults from Vite template kept but tightened to avoid overflow */
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  padding: 2rem 1.25rem;
+  /* slightly narrower to avoid overscroll on small screens */
+  text-align: left;
+  /* left-align for readability in lists/forms */
 }
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
-
 
 /* Full-screen gradient background */
 html,
@@ -59,25 +24,29 @@ body {
   color: #E9E7EF;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  /* hard stop horizontal jitter */
 }
 
 /* Centered card with a subtle glass look */
 .app-root {
-  height: 100%;
+  min-height: 100%;
   display: grid;
   place-items: center;
-  padding: 24px;
+  padding: 24px 12px;
+  box-sizing: border-box;
 }
 
 .card {
-  width: min(900px, 92vw);
+  width: min(980px, 100%);
   background: rgba(255, 255, 255, 0.06);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 16px;
-  padding: 28px;
+  padding: 22px;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
   transition: transform 200ms ease, box-shadow 200ms ease;
+  box-sizing: border-box;
 }
 
 .card:hover {
@@ -86,11 +55,42 @@ body {
 }
 
 .title {
-  margin: 0 0 16px;
+  margin: 0 0 12px;
   font-weight: 700;
   letter-spacing: 0.2px;
 }
 
+/* Tabs */
+.tabs {
+  display: inline-flex;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 6px;
+  border-radius: 12px;
+  margin: 10px 0 18px 0;
+}
+
+.tab {
+  border: 0;
+  padding: 8px 14px;
+  border-radius: 10px;
+  color: #E9E7EF;
+  background: transparent;
+  cursor: pointer;
+  transition: background 160ms ease, transform 120ms ease;
+}
+
+.tab:hover {
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.tab.active {
+  background: linear-gradient(135deg, #8E2DE2, #4A00E0);
+}
+
+/* Form bits */
 .label {
   display: block;
   font-size: 13px;
@@ -115,10 +115,10 @@ body {
   outline: none;
   padding: 0 14px;
   transition: border-color 160ms ease, box-shadow 160ms ease, transform 120ms ease;
+  box-sizing: border-box;
 }
 
 .input.wide {
-  /* wider address field inside a flex row */
   flex: 1;
 }
 
@@ -234,15 +234,10 @@ body {
   font-size: 12.5px;
   line-height: 1.35;
   white-space: pre-wrap;
-  /* wrap lines */
   word-break: break-all;
-  /* break long uninterrupted strings */
   overflow: auto;
-  /* scroll if needed */
   max-height: 260px;
-  /* rectangle height */
   min-height: 120px;
-  /* Set a comfortable width inside the card; it will shrink on mobile */
   width: 100%;
   box-sizing: border-box;
 }
@@ -250,4 +245,205 @@ body {
 .error {
   margin-top: 12px;
   color: #ff98a2;
+}
+
+/* Incoming: header */
+.section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+
+.subtitle {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.muted {
+  color: #BEB9D9;
+  font-size: 12px;
+  margin-top: 2px;
+}
+
+.new-slip {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.input.memo {
+  width: min(280px, 60vw);
+}
+
+/* Slip list */
+.slip-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.slip {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  padding: 12px;
+  box-sizing: border-box;
+}
+
+.slip.used {
+  opacity: 0.8;
+}
+
+.slip-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.slip-meta {
+  min-width: 280px;
+  flex: 1;
+}
+
+.slip-topline {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.badge {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .4px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.slip.used .badge {
+  background: rgba(255, 153, 153, 0.15);
+  border-color: rgba(255, 153, 153, 0.35);
+}
+
+.addr {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 13px;
+  word-break: break-all;
+}
+
+.meta-line {
+  margin-top: 6px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  color: #CFC8ED;
+  font-size: 12px;
+}
+
+.tag {
+  opacity: 0.9;
+}
+
+.sep {
+  opacity: 0.4;
+}
+
+.mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+}
+
+.small {
+  font-size: 11.5px;
+}
+
+.slip-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.slip-expand {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed rgba(255, 255, 255, 0.15);
+}
+
+.warning {
+  background: rgba(255, 153, 153, 0.14);
+  border: 1px solid rgba(255, 153, 153, 0.55);
+  color: #ffe3e3;
+  padding: 10px 12px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.textarea {
+  width: 100%;
+  min-height: 120px;
+  max-height: 320px;
+  border-radius: 12px;
+  padding: 12px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(18, 16, 32, 0.6);
+  color: #F3F1F9;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 12.5px;
+  line-height: 1.35;
+  resize: vertical;
+  box-sizing: border-box;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.textarea:focus {
+  border-color: #8866ff;
+  box-shadow: 0 0 0 4px rgba(136, 102, 255, 0.25);
+}
+
+.actions-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.empty {
+  opacity: 0.75;
+  font-size: 14px;
+  padding: 10px 2px;
+}
+
+/* Tighten small screens; prevent side overflows */
+@media (max-width: 560px) {
+  #root {
+    padding: 1.25rem 0.75rem;
+  }
+
+  .card {
+    padding: 16px;
+  }
+
+  .tabs {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .new-slip {
+    width: 100%;
+  }
+
+  .input.memo {
+    flex: 1;
+    width: 100%;
+  }
 }
