@@ -469,7 +469,7 @@ function App() {
                 <div className="empty">No deposit slips yet. Create one above.</div>
               )}
 
-              {sortedSlips.map((slip, renderIndex) => {
+              {sortedSlips.map((slip) => {
                 // Map back to actual index in depositSlips for actions/state
                 const realIndex = depositSlips.findIndex(s =>
                   s.prefix === slip.prefix &&
