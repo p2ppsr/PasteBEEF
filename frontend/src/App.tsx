@@ -595,6 +595,61 @@ function App() {
             {error && <p className="error">{error}</p>}
           </>
         )}
+
+        {/* Instructions Panel */}
+<details className="guide" open>
+  <summary className="guide-summary">
+    <span className="guide-title">How this works</span>
+    <span className="guide-toggle">Show/Hide</span>
+  </summary>
+
+  <div className="guide-body">
+    <div className="callout success">
+      <strong>Goal:</strong> Move funds between “Metanet Client” (MNC) and anyone—without chain scanning—using <em>Atomic BEEF</em>.
+    </div>
+
+    <div className="steps">
+      <h4>Receiving funds (Incoming tab)</h4>
+      <ol>
+        <li><strong>Generate a Deposit Slip.</strong> It creates a fresh address derived from your prefix/suffix (counterparty=<code>anyone</code>).</li>
+        <li><strong>Give the Address</strong> from that slip to the sender.</li>
+        <li><strong>Sender must provide Atomic BEEF.</strong> Ask them to use this Funder app (or any tool that outputs Atomic BEEF) to pay your slip’s address.</li>
+        <li><strong>Paste Atomic BEEF</strong> into the slip’s “Deposit Atomic BEEF” area and click <em>Deposit to Wallet</em>. The slip is then <strong>marked USED</strong>.</li>
+        <li><strong>Privacy note:</strong> Don’t reuse deposit slips. Used slips are pushed to the bottom and clearly warned.</li>
+      </ol>
+
+      <h4>Sending funds (Outgoing tab)</h4>
+      <ol>
+        <li><strong>Enter the recipient’s address</strong> and amount.</li>
+        <li><strong>Click Send</strong> and you’ll get an <em>Atomic BEEF</em> for that spend.</li>
+        <li><strong>Give the Atomic BEEF</strong> to the recipient. They can internalize it without any third-party scanners.</li>
+      </ol>
+    </div>
+
+    <div className="callout info">
+      <strong>What if the sender’s wallet doesn’t give Atomic BEEF?</strong><br />
+      Best practice is for wallets to include Atomic BEEF when sending to an address. If they can’t, the recipient can fall back to a chain-scanning service as a last resort, but it <strong>reduces privacy</strong> and adds third-party reliance. Encourage senders to use tools that export Atomic BEEF.
+    </div>
+
+    <div className="steps">
+      <h4>Exporting a Deposit Slip</h4>
+      <ul>
+        <li>Use <em>Download</em> on a slip to save a <code>.txt</code> with address + instructions.</li>
+        <li>Downloading a <strong>USED</strong> slip is allowed but warned—avoid reuse to preserve privacy.</li>
+      </ul>
+    </div>
+
+    <div className="callout warn">
+      <strong>Warnings</strong>
+      <ul>
+        <li>Reusing deposit slips harms privacy and may link activity.</li>
+        <li>Only deposit Atomic BEEF that actually pays the slip’s address—otherwise it will be rejected.</li>
+        <li>Keep your exported files safe. They may contain derivation hints and workflow guidance.</li>
+      </ul>
+    </div>
+  </div>
+</details>
+
       </div>
     </div>
   )
