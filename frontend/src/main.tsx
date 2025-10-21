@@ -172,7 +172,7 @@ function Stat({ label, value, mono }: { label: string; value: React.ReactNode; m
   );
 }
 
-function Tag({ children, tone = 'ok' as 'ok' | 'warn' | 'bad' }) {
+function Tag({ children, tone = 'ok' as 'ok' | 'warn' | 'bad' }: any) {
   return <span className={`tag ${tone}`}>{children}</span>;
 }
 
