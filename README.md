@@ -63,7 +63,7 @@ npm run preview
 
 ### Optional: CARS deployment helpers
 
-The repository includes a root-level package with `@bsv/cars-cli` and metadata in `deployment-info.json`. If you publish via BSV CARS/BRC-102, install dependencies at the repo root and use your existing deployment workflow. No additional configuration files are required for the frontend.
+The repository includes a root-level package with `@p2ppsr/cars-cli` and metadata in `deployment-info.json`. If you publish via BSV CARS/BRC-102, install dependencies at the repo root and use your existing deployment workflow. No additional configuration files are required for the frontend.
 
 ---
 
